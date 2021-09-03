@@ -1,0 +1,19 @@
+{
+  "name": "balancereader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ethers": "^5.4.6",
+    "js-yaml": "^4.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum"
@@ -18,6 +19,7 @@ func (f *ERC20TransferParser) Parse(l types.Log) ([]interface{}, error) {
 	if len(l.Topics) < 3 {
 		return nil, fmt.Errorf("invalid topics, expect %v, got %v", 3, len(l.Topics))
 	}
+	log.Printf("found log entry on block %v", l.BlockNumber)
 	sender := common.BytesToAddress(l.Topics[1].Bytes())
 	recipient := common.BytesToAddress(l.Topics[2].Bytes())
 	if len(l.Data) < 32 {
@@ -51,6 +53,7 @@ func (f *ERC20TransferFilter) GetQuery() ethereum.FilterQuery {
 	if f.From != nil {
 		topics = append(topics, []common.Hash{f.From.Hash()})
 	}
+
 	if f.To != nil {
 		if f.From != nil {
 			topics = append(topics, []common.Hash{f.To.Hash()})

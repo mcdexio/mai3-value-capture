@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"os"
 	"time"
 
 	"github.com/alexflint/go-arg"
@@ -36,17 +37,16 @@ func (h *TokenDetectHandler) Handle(args ...interface{}) error {
 		h.TokenList[addr] = true
 		h.Incremental = append(h.Incremental, addr)
 	}
-
-	// fmt.Println(args)
 	return nil
 }
 
 func main() {
 
 	var args struct {
-		SavePath    string `arg:"-s,--save" help:"path to save progress" default:"tokenList.save"`
-		RPCEndpoint string `arg:"-e,--endpoint" help:"endpoint" default:"http://server10.jy.mcarlo.com:8747"`
-		Recipient   string `arg:"-r,--recipient" help:"recipient of ERC20" default:"0x02e8735cd053fc738170011F7eBc4117f285fE9D"`
+		From        uint64 `arg:"-t,--to" help:"start block" default:"0"`
+		SavePath    string `arg:"-s,--save" help:"path to save progress" default:"tokenscanner.json"`
+		RPCEndpoint string `arg:"-e,--endpoint" help:"endpoint" default:"https://arb1.arbitrum.io/rpc"`
+		Recipient   string `arg:"-r,--recipient" help:"recipient of ERC20" default:"0xa04197E5F7971E7AEf78Cf5Ad2bC65aaC1a967Aa"`
 	}
 
 	arg.MustParse(&args)
@@ -57,28 +57,31 @@ func main() {
 		log.Fatalln(err.Error())
 	}
 	defer client.Close()
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
 	defer cancel()
 
+	var fromBlock *big.Int
+	parser := &ERC20TransferParser{}
+	handler := &TokenDetectHandler{TokenList: make(map[string]bool)}
+	if err = save.Load(); err != nil {
+		if !os.IsNotExist(err) {
+			log.Fatalln(err.Error())
+		}
+		fromBlock = big.NewInt(int64(args.From))
+	} else {
+		handler.TokenList = save.TokenList
+		fromBlock = big.NewInt(int64(save.LastBlockNumber + 1))
+	}
 	bn, err := client.BlockNumber(ctx)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-
-	parser := &ERC20TransferParser{}
-	handler := &TokenDetectHandler{}
-	if err = save.Load(); err != nil {
-		log.Fatalln(err.Error())
-	} else {
-		handler.TokenList = save.TokenList
-	}
-
 	transferQuery := &ERC20TransferFilter{
-		To: hexToAddr(args.Recipient),
 		BaseFilter: BaseFilter{
-			FromBlock: big.NewInt(int64(save.LastBlockNumber + 1)),
+			FromBlock: fromBlock,
 			ToBlock:   big.NewInt(int64(bn)),
 		},
+		To: hexToAddr(args.Recipient),
 	}
 	filter := NewSimpleFilter(
 		client,

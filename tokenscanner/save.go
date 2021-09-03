@@ -1,11 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"io/ioutil"
-	"os"
 	"time"
-
-	"gopkg.in/yaml.v2"
 )
 
 type Save struct {
@@ -26,16 +24,13 @@ func NewSave(path string) *Save {
 func (s *Save) Load() error {
 	b, err := ioutil.ReadFile(s.path)
 	if err != nil {
-		if os.IsNotExist(err) {
-			return nil
-		}
 		return err
 	}
-	return yaml.Unmarshal(b, s)
+	return json.Unmarshal(b, s)
 }
 
 func (s *Save) Save() error {
-	b, err := yaml.Marshal(s)
+	b, err := json.Marshal(s)
 	if err != nil {
 		return err
 	}
