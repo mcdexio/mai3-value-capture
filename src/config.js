@@ -1,7 +1,8 @@
 
 const ENV = {
     ARBITRUM_RPC_ENDPOINT: "https://arb1.arbitrum.io/rpc",
-    VALUE_CAPTURE_ADMIN_KEY: process.env["VALUE_CAPTURE_ADMIN_KEY"]
+    VALUE_CAPTURE_ADMIN_KEY: process.env["VALUE_CAPTURE_ADMIN_KEY"],
+    SLACK_BOT_API: "https://hooks.slack.com/services/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",
 }
 
 const ADDRESS = {

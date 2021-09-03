@@ -30,7 +30,7 @@ async function notify() {
         ]
     })
     await axios.post(
-        "https://hooks.slack.com/services/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",
+        ENV.SLACK_BOT_API,
         msg,
         { headers: { 'Content-Type': 'application/json', } }
     )
