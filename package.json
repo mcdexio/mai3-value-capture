@@ -1,19 +1,20 @@
 {
-  "name": "balancereader",
+  "name": "tokenutils",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scan": "node src/scan.js",
+    "validate": "node src/validate.js",
+    "forward": "node src/forward.js",
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "ethers": "^5.4.6",
-    "js-yaml": "^4.1.0"
+    "axios": "^0.21.1"
   },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "js-yaml": "^4.1.0"
-  }
+  "dependencies": {}
 }

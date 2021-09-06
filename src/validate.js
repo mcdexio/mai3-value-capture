@@ -123,6 +123,10 @@ async function start() {
     await notify(lastBlockNumber, tokensToFroward)
 }
 
-start().then().catch(reason => {
-    return reportError("Scan")(reason.toString())
-}).then(() => process.exit(1))
+// start().then().catch(reason => {
+//     return reportError("Scan")(reason.toString())
+// }).then(() => process.exit(1))
+
+module.exports = {
+    start
+}

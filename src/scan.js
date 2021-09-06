@@ -90,6 +90,10 @@ async function start() {
     await notify(endBlock, Array.from(new Set(tokens)))
 }
 
-start().then().catch(reason => {
-    return reportError("Scan")(reason.toString())
-}).then(() => process.exit(1))
+module.exports = {
+    start
+}
+
+// start().then().catch(reason => {
+//     return reportError("Scan")(reason.toString())
+// }).then(() => process.exit(1))

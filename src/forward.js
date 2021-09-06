@@ -43,7 +43,7 @@ async function start() {
         return;
     }
     const tokens = stamp.tokens;
-    console.log(`going to forward: ${tokens}`)
+    console.log(`going to forward: ${JSON.stringify(tokens)}`)
 
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
     const wallet = new ethers.Wallet(ENV.VALUE_CAPTURE_ADMIN_KEY, provider)
@@ -51,6 +51,10 @@ async function start() {
     console.log(`going to call valueCapture.forwardMultiAssets(${Object.keys(tokens)}, ${Object.values(tokens)})`)
 }
 
-start().then().catch(reason => {
-    return reportError("Forward")(reason.toString())
-}).then(() => process.exit(1))
+// start().then().catch(reason => {
+//     return reportError("Forward")(reason.toString())
+// }).then(() => process.exit(1))
+
+module.exports = {
+    start
+}
