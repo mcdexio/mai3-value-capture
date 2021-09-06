@@ -2,6 +2,7 @@
   "name": "CaptureUtils",
   "version": "1.0.0",
   "description": "utils to forward assets from ValueCapture to Vault",
+  "repository": "https://github.com/mcdexio/mai3-value-capture",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
