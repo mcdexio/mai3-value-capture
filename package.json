@@ -12,10 +12,10 @@
     "start": "node src/index.js"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
+  "license": "GPL",
+  "dependencies": {
     "ethers": "^5.4.6",
     "axios": "^0.21.1"
   },
-  "dependencies": {}
+  "devDependencies": {}
 }
