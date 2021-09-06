@@ -1,4 +1,4 @@
-name: fe-v3
+name: captureutils
 
 on:
   push:
