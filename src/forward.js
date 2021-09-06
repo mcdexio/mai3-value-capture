@@ -29,6 +29,7 @@ async function notify() {
             }
         ]
     })
+    console.log("[DEBUG]:", JSON.stringify(msg))
     await axios.post(
         ENV.SLACK_BOT_API,
         msg,
@@ -43,12 +44,13 @@ async function start() {
         return;
     }
     const tokens = stamp.tokens;
-    console.log(`going to forward: ${JSON.stringify(tokens)}`)
 
+    console.log(`going to call valueCapture.forwardMultiAssets(${Object.keys(tokens)}, ${Object.values(tokens)})`)
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
     const wallet = new ethers.Wallet(ENV.VALUE_CAPTURE_ADMIN_KEY, provider)
     await fowardTokens(wallet, tokens)
-    console.log(`going to call valueCapture.forwardMultiAssets(${Object.keys(tokens)}, ${Object.values(tokens)})`)
+
+    await notify();
 }
 
 // start().then().catch(reason => {

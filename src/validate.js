@@ -85,6 +85,7 @@ async function notify(endBlock, tokens) {
             ...entries
         ]
     })
+    console.log("[DEBUG]:", JSON.stringify(msg))
     await axios.post(
         ENV.SLACK_BOT_API,
         msg,
