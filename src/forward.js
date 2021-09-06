@@ -30,11 +30,19 @@ async function notify() {
         ]
     })
     console.log("[DEBUG]:", JSON.stringify(msg))
-    await axios.post(
-        ENV.SLACK_BOT_API,
-        msg,
-        { headers: { 'Content-Type': 'application/json', } }
-    )
+    try {
+        await axios.post(
+            ENV.SLACK_BOT_API,
+            msg,
+            { headers: { 'Content-Type': 'application/json', } }
+        )
+    } catch (err) {
+        if (typeof err.response != 'undefined') {
+            console.log(err.response.data)
+        } else {
+            console.error(err);
+        }
+    }
 }
 
 async function start() {
