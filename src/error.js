@@ -4,9 +4,6 @@ const { ENV } = require("./config")
 
 function reportError(title) {
     return async function (error) {
-
-        console.log(error)
-
         const msg = {
             blocks: [
                 {

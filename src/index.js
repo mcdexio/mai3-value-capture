@@ -13,4 +13,4 @@ async function main() {
     console.log("forward done.")
 }
 
-main().then().catch(console.log).then(() => process.exit(1))
+main().then().catch(console.log).then(() => process.exit(0))
