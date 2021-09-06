@@ -1,7 +1,7 @@
 {
-  "name": "tokenutils",
+  "name": "CaptureUtils",
   "version": "1.0.0",
-  "description": "",
+  "description": "utils to forward assets from ValueCapture to Vault",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

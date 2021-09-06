@@ -1,0 +1,37 @@
+name: fe-v3
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+      - uses: actions/checkout@v1 # without submodules
+      - name: disable the keychain credential helper
+        run: git config --global credential.helper ""
+      - name: enable the local store credential helper
+        run: git config --global --add credential.helper store
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.14.1'
+
+      - name: Login to google
+        run: |
+          echo ${{ secrets.GCLOUD_SERVICE_KEY }} | python -m base64 -d >/tmp/key.json 2>/dev/null
+          cat /tmp/key.json | docker login -u _json_key --password-stdin https://us.gcr.io
+    
+      - name: Build
+        run: |
+          docker build -t us.gcr.io/mcdex3/captureutils:${{ steps.get_version.outputs.VERSION }} .
+      - name: Upload to google
+        run: |
+          docker push us.gcr.io/mcdex3/captureutils:${{ steps.get_version.outputs.VERSION }}
