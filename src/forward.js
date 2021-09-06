@@ -48,10 +48,11 @@ async function notify() {
 async function start() {
     // prepare calldata
     const stamp = load("./stamps/validate_output.json")
-    if (stamp.tokens.length == 0) {
+    const tokens = stamp.tokens;
+    if (Object.keys(tokens) == 0) {
+        console.log("nothing to forward")
         return;
     }
-    const tokens = stamp.tokens;
 
     console.log(`going to call valueCapture.forwardMultiAssets(${Object.keys(tokens)}, ${Object.values(tokens)})`)
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
