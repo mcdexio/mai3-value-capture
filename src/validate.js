@@ -78,7 +78,7 @@ async function notify(endBlock, tokens) {
                 type: "header",
                 text: {
                     "type": "plain_text",
-                    "text": `#02 ERC20校验结果 @${endBlock} `,
+                    "text": `#02 ERC20 Validate Result @${endBlock} `,
                     "emoji": true
                 }
             },

@@ -23,7 +23,7 @@ async function notify() {
                 type: "header",
                 text: {
                     "type": "plain_text",
-                    "text": `#03 Forward已执行`,
+                    "text": `#03 Forward Execution Done`,
                     "emoji": true
                 }
             }

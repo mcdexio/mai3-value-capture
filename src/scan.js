@@ -45,7 +45,7 @@ async function notify(endBlock, tokens) {
                 type: "header",
                 text: {
                     "type": "plain_text",
-                    "text": `#01 ERC20扫描结果 @${endBlock}`,
+                    "text": `#01 ERC20 Scanning Result @${endBlock}`,
                     "emoji": true
                 }
             },

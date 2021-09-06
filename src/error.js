@@ -13,7 +13,7 @@ function reportError(title) {
                     type: "header",
                     text: {
                         "type": "plain_text",
-                        "text": `!!! 日常脚本执行错误: ${title}`,
+                        "text": `!!! script exception: ${title}`,
                         "emoji": true
                     }
                 },
