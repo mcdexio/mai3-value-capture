@@ -3,6 +3,7 @@ const ENV = {
     ARBITRUM_RPC_ENDPOINT: process.env["ARBITRUM_RPC_ENDPOINT"],
     VALUE_CAPTURE_ADMIN_KEY: process.env["VALUE_CAPTURE_ADMIN_KEY"],
     SLACK_BOT_API: process.env["SLACK_BOT_API"],
+    REDIS: process.env["REDIS"],
 }
 
 const ADDRESS = {

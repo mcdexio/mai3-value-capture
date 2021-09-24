@@ -11,7 +11,6 @@ function load(path, defaultValue) {
     }
 }
 
-
 function save(path, value) {
     const content = {
         value,

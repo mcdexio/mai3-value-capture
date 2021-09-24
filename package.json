@@ -14,8 +14,9 @@
   "author": "",
   "license": "GPL",
   "dependencies": {
+    "axios": "^0.21.1",
     "ethers": "^5.4.6",
-    "axios": "^0.21.1"
+    "redis": "^4.0.0-rc.2"
   },
   "devDependencies": {}
 }

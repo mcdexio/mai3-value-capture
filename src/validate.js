@@ -2,7 +2,7 @@ const ethers = require("ethers")
 const axios = require("axios")
 
 const { ENV, ADDRESS, ABI } = require("./config")
-const { save, load } = require("./stamp")
+const { save, load } = require("./stampRedis")
 const { reportError } = require("./error")
 
 
@@ -103,7 +103,7 @@ async function notify(endBlock, tokens) {
 
 async function start() {
     // prepare calldata
-    const stamp = load("./stamps/scan_output.json")
+    const stamp = await load("./stamps/scan_output.json")
     if (stamp.tokens.length == 0) {
         return;
     }
@@ -127,7 +127,7 @@ async function start() {
             tokensToFroward[item[0]] = item[1]
         })
     console.log(`tokens with non - zero balance: ${JSON.stringify(tokensToFroward)} `)
-    save("./stamps/validate_output.json", { tokens: tokensToFroward })
+    await save("./stamps/validate_output.json", { tokens: tokensToFroward })
 
     await notify(lastBlockNumber, tokensToFroward)
 }

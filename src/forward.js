@@ -2,7 +2,7 @@ const ethers = require("ethers")
 const axios = require("axios")
 
 const { ENV, ADDRESS, ABI } = require("./config")
-const { save, load } = require("./stamp")
+const { save, load } = require("./stampRedis")
 const { reportError } = require("./error")
 
 
@@ -47,7 +47,7 @@ async function notify() {
 
 async function start() {
     // prepare calldata
-    const stamp = load("./stamps/validate_output.json")
+    const stamp = await load("./stamps/validate_output.json")
     const tokens = stamp.tokens;
     if (Object.keys(tokens) == 0) {
         console.log("nothing to forward")

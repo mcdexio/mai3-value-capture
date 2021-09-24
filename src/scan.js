@@ -2,7 +2,7 @@ const ethers = require("ethers")
 const axios = require("axios")
 
 const { ENV, ADDRESS } = require("./config")
-const { save, load } = require("./stamp")
+const { save, load } = require("./stampRedis")
 const { reportError } = require("./error")
 
 const TRANSFER_EVENT_ID = ethers.utils.id("Transfer(address,address,uint256)")
@@ -70,7 +70,7 @@ async function notify(endBlock, tokens) {
 
 async function start() {
     // load
-    const stamp = load("./stamps/scan_output.json", { lastBlockNumber: 0, tokens: [] })
+    const stamp = await load("./stamps/scan_output.json", { lastBlockNumber: 0, tokens: [] })
     // get latest block number
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
     endBlock = await provider.getBlockNumber()
@@ -91,7 +91,7 @@ async function start() {
             end
         )
         tokens = tokens.concat(result)
-        save("./stamps/scan_output.json", { lastBlockNumber: end, tokens: Array.from(new Set(tokens)) })
+        await save("./stamps/scan_output.json", { lastBlockNumber: end, tokens: Array.from(new Set(tokens)) })
 
         begin = end + 1
         end = Math.min(begin + SCAN_STEP, endBlock)
