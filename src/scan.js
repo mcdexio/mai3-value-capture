@@ -70,7 +70,7 @@ async function notify(endBlock, tokens) {
 
 async function start() {
     // load
-    const stamp = await load("./stamps/scan_output.json", { lastBlockNumber: 0, tokens: [] })
+    const stamp = await load("./stamps/scan_output.json", { lastBlockNumber: 1563731, tokens: [] })
     // get latest block number
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
     endBlock = await provider.getBlockNumber()
