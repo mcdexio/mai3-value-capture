@@ -16,7 +16,7 @@ async function distributeSeries(signer, round) {
 
 async function start() {
     // prepare calldata
-    console.log(`going to call mcbMinter.mintFromRound(${Object.keys(tokens)}, ${Object.values(tokens)})`)
+    console.log(`going to call mcbMinter.mintFromRound(0)`)
     const provider = new ethers.providers.JsonRpcProvider(ENV.ARBITRUM_RPC_ENDPOINT)
     const wallet = new ethers.Wallet(ENV.VALUE_CAPTURE_ADMIN_KEY, provider)
     await distributeSeries(wallet, 0)
