@@ -9,6 +9,7 @@ const ENV = {
 const ADDRESS = {
     VALUE_CAPTURE: "0xa04197E5F7971E7AEf78Cf5Ad2bC65aaC1a967Aa",
     BATCH_READER: "0xE7eBF22d9CB3DF2967fc51D35Db7a0d72b272587",
+    MCB_MINTER: "0x7230D622D067D9C30154a750dBd29C035bA7605a",
 }
 
 const ABI = {
@@ -23,6 +24,9 @@ const ABI = {
     ],
     ERC20: [
         "function balanceOf(address) view returns (uint256)"
+    ],
+    MCB_MINTER: [
+        "function mintFromRound(uint256)"
     ],
 }
 
