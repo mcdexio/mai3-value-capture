@@ -12,8 +12,8 @@ async function main() {
     console.log("validate done.")
     await forward.start()
     console.log("forward done.")
-    await distribute.start()
-    console.log("distribute done.")
+    // await distribute.start()
+    // console.log("distribute done.")
 }
 
 main().then().catch(console.log).then(() => process.exit(0))
