@@ -22,9 +22,9 @@ async function start() {
     await distributeSeries(wallet, 0)
 }
 
-start().then().catch(reason => {
-    return reportError("Forward")(reason.toString())
-}).then(() => process.exit(1))
+// start().then().catch(reason => {
+//     return reportError("Forward")(reason.toString())
+// }).then(() => process.exit(1))
 
 module.exports = {
     start
